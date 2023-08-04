@@ -36,3 +36,79 @@ Os dados foram organizado em 7 tabelas, sendo 3 tabelas principais:
 ![Modelo ER](desafio-btg-er.svg)
 ### Modelo DER
 ![Modelo ER](desafio-btg.svg)
+
+
+## Como rodar o projeto
+### Pré-requisitos
+- Node.js
+- npm
+- PostgreSQL
+### Instalação
+- Clone o repositório
+```bash
+git clone 
+## Rotas
+### Customer
+- **POST** `/create-customer`: Cria um novo cliente.
+```json
+{
+    "username": "Nome do cliente",
+    "password": "  Senha do cliente",
+    "email": "Email cliente",
+    "cpf": "CPF do cliente",
+    "address": "Endereço do cliente"
+    }
+```
+- **GET** `/customer/:id`: Retorna o cliente específico.
+
+- **GET** `/customer-transactions`: Retorna as transações do cliente.
+```json
+{
+    "email": "Email cliente",
+    "cpf": "CPF do cliente",
+}
+```
+- **PUT** `/update-customer`: Atualiza os dados do cliente.
+```json
+{
+    "id": "ID do cliente",
+    "username": "Nome do cliente",
+    "password": "Senha do cliente",
+    "email": "  E-mail do cliente",
+    "address": "endereço do cliente",
+    }
+```
+### Account
+- **POST** `/create-account`: Cria uma nova conta bancária.
+```json
+{
+    "cpf": "cpf do cliente",
+    "type_id": "ID do tipo de conta",
+    "balance": "Saldo da conta"
+}
+```
+- **GET** `/account`: Retorna a conta bancária específica.
+```json
+{
+    "account_number": "Número da conta",
+    "cpf": "cpf do cliente"
+}
+```
+- **PUT** `/update-account`: Atualiza os dados da conta bancária (adiciona um novo cpf a conta).
+```json
+{
+    "account_number": "Número da conta",
+    "cpf": "cpf do cliente",
+}
+```
+
+### Transaction
+- **POST** `/create-transaction`: Cria uma nova transação.
+```json
+{
+    "account_number": "Número da conta",
+    "customer_id": "id do cliente",
+    "transaction_type_id": "ID do tipo de transação",
+    "value": "Valor da transação"
+}
+```
