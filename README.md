@@ -58,13 +58,30 @@ Os dados foram organizado em 7 tabelas, sendo 3 tabelas principais:
 
 ## Como rodar o projeto
 ### Pré-requisitos
-- Node.js
-- npm
-- PostgreSQL
+- Node.js LTS
+- npm LTS
+- PostgreSQL LTS
 ### Instalação
 - Clone o repositório
 ```bash
-git clone 
+git clone https://github.com/matheus1103/Desafio-BTG.git
+```
+- Instale as dependências no diretório `/backend`
+```bash
+npm install
+```
+- Crie um arquivo `.env` no diretório `/backend` com as seguintes variáveis de ambiente:
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
+```
+- Execute as migrations
+```bash
+npx prisma migrate dev
+```
+- Execute o projeto
+```bash
+npm run dev
+```
 ## Rotas
 ### Customer
 - **POST** `/create-customer`: Cria um novo cliente.
