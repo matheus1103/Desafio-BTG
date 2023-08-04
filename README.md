@@ -70,7 +70,9 @@ git clone https://github.com/matheus1103/Desafio-BTG.git
 ```bash
 npm install
 ```
-- Crie um banco de dados no PostgreSQL - Você pode utilizar algum software para criar o banco ou então utilizar o comando abaixo no terminal (provavelmente necessitará de estar conectado como usuário postgres para executar o script):
+- Crie um banco de dados no PostgreSQL - Você pode utilizar algum software para criar o banco ou então utilizar o comando abaixo no terminal
+
+obs: possivelmente necessitará de estar conectado como usuário postgres para executar o script:
 ```bash
     createdb -U postgres database
 ```
@@ -83,7 +85,10 @@ DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
 ```bash
 npx prisma migrate dev
 ```
-- **IMPORTANTE**: Executar backup do banco de dados utilizando o arquivo backup.sql que contém os dados estáticos para funcionamento do projeto (substitua com sua database) - provavelmente necessitará de estar conectado como usuário postgres para executar o script
+- **IMPORTANTE**: Executar backup do banco de dados utilizando o arquivo `backup.sql` que contém os dados estáticos para funcionamento do projeto
+(substitua com sua database)
+
+obs: provavelmente necessitará de estar conectado como usuário postgres para executar o script
 ```bash
 psql -U postgres -d database < backup.sql
 
