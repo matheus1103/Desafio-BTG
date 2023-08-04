@@ -62,7 +62,7 @@ Os dados foram organizado em 7 tabelas, sendo 3 tabelas principais:
 - npm LTS
 - PostgreSQL LTS
 ### Instalação
-- Clone o repositório
+- Utilizando o terminal no diretório desejado, clone o repositório
 ```bash
 git clone https://github.com/matheus1103/Desafio-BTG.git
 ```
@@ -70,6 +70,11 @@ git clone https://github.com/matheus1103/Desafio-BTG.git
 ```bash
 npm install
 ```
+- Crie um banco de dados no PostgreSQL - Você pode utilizar algum software para criar o banco ou então utilizar o comando abaixo no terminal (provavelmente necessitará de estar conectado como usuário postgres para executar o script):
+```bash
+    createdb -U postgres database
+```
+
 - Crie um arquivo `.env` no diretório `/backend` com as seguintes variáveis de ambiente (substitua os valores correspondentes ao seu banco de dados criado):
 ```bash
 DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
@@ -78,7 +83,7 @@ DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
 ```bash
 npx prisma migrate dev
 ```
-- Executar backup do banco de dados para os dados estáticos (substitua com sua database)
+- **IMPORTANTE**: Executar backup do banco de dados utilizando o arquivo backup.sql que contém os dados estáticos para funcionamento do projeto (substitua com sua database) - provavelmente necessitará de estar conectado como usuário postgres para executar o script
 ```bash
 psql -U postgres -d database < backup.sql
 
@@ -87,6 +92,7 @@ psql -U postgres -d database < backup.sql
 ```bash
 npm run dev
 ```
+- Acesse o projeto em `http://localhost:3333`
 ## Rotas
 ### Customer
 - **POST** `/create-customer`: Cria um novo cliente.
