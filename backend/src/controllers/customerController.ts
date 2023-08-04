@@ -71,21 +71,28 @@ export default {
             return response.status(422).json({message: "fail to update customer, email already used"})
         }
     },
-
-    async getCustomer(request: Request, response: Response){
+    async getCustomer(request: Request, response: Response) {
         try {
             const { id } = request.params;
             const customer = await prisma.customer.findUnique({
-                where: {
-                    id: parseInt(id, 10)
+                where: { id: Number(id) },
+                include: {
+                    customer_account: {
+                        select: {
+                            accounts: {
+                                select: {
+                                    account_number: true
+                                }
+                            }
+                        }
+                    }
                 }
             });
             if (!customer) {
                 return response.status(404).json({error: true, message: "Customer not found"});
             }
             return response.json(customer);
-        }
-        catch(error: any){
+        } catch(error: any) {
             return response.status(500).json({message: error.message})
         }
     },
