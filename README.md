@@ -2,19 +2,19 @@
 
 # Sumário
 
-- [Descrição](#Descrição)
-- [Tecnologias](#Tecnologias)
-- [Organização do banco de dados](#Organização-do-banco-de-dados)
-  - [Cardinalidades e regras de negócio](#Cardinalidades-e-regras-de-negócio)
-  - [Modelo ER](#Modelo-ER)
-  - [Modelo DER](#Modelo-DER)
-- [Como rodar o projeto](#Como-rodar-o-projeto)
-    - [Pré-requisitos](#Pré-requisitos)
-    - [Instalação](#Instalação)
-- [Rotas](#Rotas)
-    - [Customer](#Customer)
-    - [Account](#Account)
-    - [Transaction](#Transaction)
+- [Descrição](#descrição)
+- [Tecnologias](#tecnologias)
+- [Organização do banco de dados](#organização-do-banco-de-dados)
+  - [Cardinalidades e regras de negócio](#cardinalidades-e-regras-de-negócio)
+  - [Modelo ER](#modelo-ER)
+  - [Modelo DER](#modelo-DER)
+- [Como rodar o projeto](#como-rodar-o-projeto)
+    - [Pré-requisitos](#pré-requisitos)
+    - [Instalação](#instalação)
+- [Rotas](#rotas)
+    - [Customer](#customer)
+    - [Account](#account)
+    - [Transaction](#transaction)
 
 
 ## Descrição
