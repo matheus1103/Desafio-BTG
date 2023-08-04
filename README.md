@@ -70,13 +70,18 @@ git clone https://github.com/matheus1103/Desafio-BTG.git
 ```bash
 npm install
 ```
-- Crie um arquivo `.env` no diretório `/backend` com as seguintes variáveis de ambiente:
+- Crie um arquivo `.env` no diretório `/backend` com as seguintes variáveis de ambiente (substitua os valores correspondentes ao seu banco de dados criado):
 ```bash
 DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
 ```
 - Execute as migrations
 ```bash
 npx prisma migrate dev
+```
+- Executar backup do banco de dados para os dados estáticos (substitua com sua database)
+```bash
+psql -U postgres -d database < backup.sql
+
 ```
 - Execute o projeto
 ```bash
