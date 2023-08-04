@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model account_type {
+  id          Int        @id @default(autoincrement())
+  name        String?    @db.VarChar
+  description String?    @db.VarChar
+  accounts    accounts[]
+}
+
+model accounts {
+  id               Int                @id @default(autoincrement())
+  type_id          Int?
+  balance          Float              @default(0)
+  created_at       DateTime?          @default(now())
+  account_type     account_type?      @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  customer_account customer_account[]
+  transactions     transactions[]
+}
+
+model customer {
+  id               Int                @id @default(autoincrement())
+  username         String?            @db.VarChar
+  password         String?            @db.VarChar
+  email            String?            @unique
+  cpf              String?            @unique
+  address          String?            @db.VarChar
+  created_at       DateTime?          @default(now())
+  updated_at       DateTime?          @updatedAt
+  customer_account customer_account[]
+  transactions     transactions[]
+
+  @@unique([cpf, email])
+}
+
+model customer_account {
+  customer_id Int
+  account_id  Int
+  created_at       DateTime?          @default(now())
+  accounts    accounts  @relation(fields: [account_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  customer    customer  @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([customer_id, account_id])
+}
+
+model transaction_status {
+  id           Int            @id @default(autoincrement())
+  name         String?        @db.VarChar
+  description  String?        @db.VarChar
+  transactions transactions[]
+}
+
+model transactions {
+  id                 Int                 @id @default(autoincrement())
+  transaction_type_id            Int?
+  status_id          Int?                @default(1)
+  account_id         Int?
+  customer_id        Int?
+  value              Float?
+  created_at       DateTime?          @default(now())
+  accounts           accounts?           @relation(fields: [account_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  customer           customer?           @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  transaction_status transaction_status? @relation(fields: [status_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  transactions_type  transactions_type?  @relation(fields: [transaction_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model transactions_type {
+  id           Int            @id @default(autoincrement())
+  name         String?        @db.VarChar
+  description  String?        @db.VarChar
+  transactions transactions[]
+}
