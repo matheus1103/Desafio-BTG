@@ -65,7 +65,21 @@ export default {
                     account_id: account.id
                 }
             })
-
+            if(account && account.balance > 0) {
+                // Cria a nova transação
+                const transaction = await prisma.transactions.create({
+                    data: {
+                        account_id: account.id,
+                        customer_id: customerExists.id,
+                        // depósito
+                        transaction_type_id: 2,
+                        value: balance,
+                        // transação em processamento
+                        status_id: 3
+                    }
+                });
+                return response.json({ account, transaction });
+            }
             return response.json({error: false, message: "Account created successfully", account})
 
         }
