@@ -1,4 +1,22 @@
 # Desafio - BTG Pactual Digital
+
+# Sumário
+
+- [Descrição](#Descrição)
+- [Tecnologias](#Tecnologias)
+- [Organização do banco de dados](#Organização-do-banco-de-dados)
+  - [Cardinalidades e regras de negócio](#Cardinalidades-e-regras-de-negócio)
+  - [Modelo ER](#Modelo-ER)
+  - [Modelo DER](#Modelo-DER)
+- [Como rodar o projeto](#Como-rodar-o-projeto)
+    - [Pré-requisitos](#Pré-requisitos)
+    - [Instalação](#Instalação)
+- [Rotas](#Rotas)
+    - [Customer](#Customer)
+    - [Account](#Account)
+    - [Transaction](#Transaction)
+
+
 ## Descrição
 Criação de uma API REST para um sistema de contas bancárias digitais simples.
 ## Tecnologias
