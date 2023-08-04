@@ -85,14 +85,11 @@ DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
 ```bash
 npx prisma migrate dev
 ```
-- **IMPORTANTE**: Executar backup do banco de dados utilizando o arquivo `backup.sql` que contém os dados estáticos para funcionamento do projeto
-(substitua com sua database)
-
-obs: provavelmente necessitará de estar conectado como usuário postgres para executar o script
+- Execute a seed
 ```bash
-psql -U postgres -d database < backup.sql
-
+npx prisma db seed
 ```
+
 - Execute o projeto
 ```bash
 npm run dev
