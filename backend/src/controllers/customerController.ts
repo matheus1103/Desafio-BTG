@@ -18,6 +18,9 @@ export default {
             if (!username || !password || !email || !cpf || !address) {
                 return response.json({error: true, message: "All fields must be filled out"});
             }
+            if (cpf.length !== 11) {
+                return response.json({error: true, message: "The cpf must be 11 carachters long"});
+            }
             const customer = await prisma.customer.create({
                 data: {
                     username,
@@ -65,7 +68,51 @@ export default {
 
         }
         catch(error: any){
-            return response.status(500).json({message: "fail to update customer, email already used"})
+            return response.status(422).json({message: "fail to update customer, email already used"})
+        }
+    },
+
+    async getCustomer(request: Request, response: Response){
+        try {
+            const { id } = request.params;
+            const customer = await prisma.customer.findUnique({
+                where: {
+                    id: parseInt(id, 10)
+                }
+            });
+            if (!customer) {
+                return response.status(404).json({error: true, message: "Customer not found"});
+            }
+            return response.json(customer);
+        }
+        catch(error: any){
+            return response.status(500).json({message: error.message})
+        }
+    },
+
+    async getCustomerTransactions(request: Request, response: Response){
+        try {
+            const { email, cpf } = request.body;
+            const customer = await prisma.customer.findUnique({
+                where: { cpf, email },
+                include: {
+                    transactions: {
+                        include: {
+                            transaction_status: true,
+                            transactions_type: true
+                        }
+                    }
+                }
+            });
+
+            if (!customer) {
+                return response.status(404).json({error: true, message: "Customer not found"});
+            }
+
+            return response.json(customer.transactions);
+        }
+        catch(error: any){
+            return response.status(500).json({message: error.message})
         }
     }
 }

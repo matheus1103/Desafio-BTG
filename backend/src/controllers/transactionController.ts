@@ -4,16 +4,16 @@ import { prisma } from "../db";
 export default {
     async createTransaction(request: Request, response: Response){
         try {
-            const { account_id, customer_id, transaction_type_id, status_id, value } = request.body;
-
+            const { account_number, customer_id, transaction_type_id, value } = request.body;
             // Verifica se a associação já existe
             const account = await prisma.accounts.findFirst({
-
+                where: { account_number: account_number },
                 select: {
+                    id: true,
+                    balance: true,
                     customer_account:{
-                        where: { customer_id: customer_id, account_id: account_id }
-                    },
-                    balance: true
+                        where: { customer_id: customer_id }
+                    }
                 }
             });
 
@@ -21,12 +21,11 @@ export default {
                 return response.json({error: true, message: "We couldn't this customer/account association"})
             }
             if (transaction_type_id === 1){
-
                 if (account?.balance < value){
                     return response.json({error: true, message: "Insufficient funds"})
                 }
                 await prisma.accounts.update({
-                    where: { id: account_id },
+                    where: { account_number: account_number },
                     data: {
                         balance: account.balance - value
                     }
@@ -34,7 +33,7 @@ export default {
 
             } else if (transaction_type_id === 2){
                     await prisma.accounts.update({
-                        where: { id: account_id },
+                        where: { account_number: account_number },
                         data: {
                             balance: account.balance + value
                         }
@@ -42,10 +41,11 @@ export default {
             }
             const transaction = await prisma.transactions.create({
                 data: {
-                    account_id: account_id,
+                    account_id: account.id,
                     customer_id: customer_id,
                     transaction_type_id: transaction_type_id,
-                    status_id: status_id,
+                    // por padrão o status é 3 (em andamento)
+                    status_id: 3,
                     value: value,
                     created_at: new Date()
                 }
