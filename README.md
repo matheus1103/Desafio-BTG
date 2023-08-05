@@ -28,7 +28,7 @@ Lista de tecnologias utilizadas para criação da API:
 - PostgreSQL
 
 ## Organização do banco de dados
-O banco de dados relacional escolhido foi o postgreSQL por ser um dos bancos de dados mais utilizados no mercado.
+O banco de dados relacional escolhido foi o PostgreSQL por ser um dos bancos de dados mais utilizados no mercado.
 
 Os dados foram organizado em 7 tabelas, sendo 3 tabelas principais:
 - **Customer**: Tabela que armazena os dados do cliente, como `nome, CPF, e-mail, senha, endereço, data de criação e data de atualização`.
@@ -58,9 +58,9 @@ Os dados foram organizado em 7 tabelas, sendo 3 tabelas principais:
 
 ## Como rodar o projeto
 ### Pré-requisitos
-- Node.js LTS
-- npm LTS
-- PostgreSQL LTS
+- Node.js v18.17.0
+- npm 9.6.7
+- PostgreSQL 15.3
 ### Instalação
 - Utilizando o terminal no diretório desejado, clone o repositório
 ```bash
@@ -81,11 +81,11 @@ obs: possivelmente necessitará de estar conectado como usuário postgres para e
 ```bash
 DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
 ```
-- Execute as migrations
+- Execute as migrations para criação das tabelas do banco de dados
 ```bash
 npx prisma migrate dev
 ```
-- Execute a seed
+- Execute a seed para popular as tabelas estáticas do banco de dados
 ```bash
 npx prisma db seed
 ```
